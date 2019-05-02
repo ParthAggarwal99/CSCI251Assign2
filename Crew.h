@@ -6,11 +6,19 @@
 #define CSCI251ASSIGN2_CREW_H
 
 #include "Officer.h"
+#include "random"
+
+/**
+ * TODO:
+ * implement last names
+ */
+
+
 
 class Crew {
 public:
     Crew();
-    string casualty(void (*functocall)(string));
+    string casualty();
 private:
     Officer captain;
     Officer pilot;
@@ -27,8 +35,14 @@ private:
     void killCrew();
 
     Officer generateOfficer(int lower,int upper);
+
+
+    string names [19] = {"Aaren", "Aarez","Alum", "Alvern", "Jorge", "Joris", "Jorry", "Keeton", "Kehinde", "Keiga","Leo",
+                       "Leon", "Leona","Milosz", "Mir", "Mirza", "Mitch","Zac","Zubair"};
 };
 
+static uniform_int_distribution<unsigned> firstNameDist (0,19);
+static uniform_int_distribution<unsigned> ageDist (18,70);
 
 
 

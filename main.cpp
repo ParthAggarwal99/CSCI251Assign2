@@ -4,12 +4,16 @@
  * LAB: FRIDAY 10:30
  */
 #include <iostream>
-#include "Officer.h"
+#include "Crew.h"
+#include "Engine.h"
+
+/**
+ * TODO:
+ *  find out how to do getters for inherited classes
+ */
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    Officer officer = Officer("Tony",32,SkillSet(50,100));
-    cout <<officer.getName()<<" "<<officer.getAge()<<endl;
-    cout <<officer.getSkillset().getEngineering()<<endl;
+
+
     return 0;
 }

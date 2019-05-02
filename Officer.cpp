@@ -3,6 +3,7 @@
 //
 
 #include "Officer.h"
+#include "SkillSet.h"
 #include "random"
 
 
@@ -23,6 +24,15 @@ SkillSet::SkillSet(int upper,int lower) {
 
 //region Getters
 
+
+const string &Officer::getName() const {
+    return name;
+}
+
+int Officer::getAge() const {
+    return age;
+}
+
 double SkillSet::getNegotiation() const {
     return negotiation;
 }
@@ -41,15 +51,6 @@ double SkillSet::getMining() const {
 
 double SkillSet::getWeapons() const {
     return weapons;
-}
-
-
-const string &Officer::getName() const {
-    return name;
-}
-
-int Officer::getAge() const {
-    return age;
 }
 
 const SkillSet &Officer::getSkillset() const {

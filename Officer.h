@@ -14,17 +14,10 @@ static std::default_random_engine randEng(time(0));
 
 class Officer {
 public:
-    Officer();
-
     Officer(const string &name, int age, const SkillSet skillset);
-
     const SkillSet &getSkillset() const;
-
     const string &getName() const;
-
     int getAge() const;
-
-
 private:
 
     string name;

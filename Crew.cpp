@@ -3,13 +3,28 @@
 //
 
 #include "Crew.h"
-#include "random"
+/**
+ * generate crew
+ * create casualty related functions
+ *
+ */
 
 
-Crew::Crew() {
+    Crew::Crew() :  captain(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)) ,
+                    pilot(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
+                    engineer(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
+                    miner (names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
+                    weaponSmith(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)){
 
+    }
+
+
+
+
+string casualty(void (*functocall)(string)){
+    cout<< (*functocall)<<endl;
 }
 
-Officer generateOfficer(int lower,int upper){
-
+void generateOfficer(int lower,int upper, Officer* officer){
+    *officer = Officer("tony",32,SkillSet(lower,upper));
 }
