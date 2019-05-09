@@ -8,9 +8,12 @@
 #include "iostream"
 #include "SkillSet.h"
 #include "random"
+#include <time.h>
+
+static std::default_random_engine randEng(time(0));
+
 
 using namespace std;
-static std::default_random_engine randEng(time(0));
 
 class Officer {
 public:
@@ -19,11 +22,9 @@ public:
     const string &getName() const;
     int getAge() const;
 private:
-
     string name;
     int age;
     SkillSet skillset;
-
 };
 
 #endif //CSCI251ASSIGN2_OFFICER_H

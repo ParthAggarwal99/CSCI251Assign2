@@ -46,9 +46,8 @@ public:
                                                                                                      peopleCapacity(
                                                                                                              peopleCapacity) {}
 
-    virtual ~Hull();
 
-    double getArmor() const {
+    int getArmor() const {
         return armor;
     }
 
@@ -72,14 +71,12 @@ public:
         return hp;
     }
 
-    static void generateHulls();
-
-    static Hull pickHull(int i);
+    static Hull* pickHull(int i);
 
 private:
     std::string name;
     double hp = 1000;
-    double armor;
+    int armor;
     int weight;
     int cargoCapacity;
     int peopleCapacity;

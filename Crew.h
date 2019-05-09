@@ -13,7 +13,8 @@
  * implement last names
  */
 
-
+static uniform_int_distribution<unsigned> firstNameDist (0,19);
+static uniform_int_distribution<unsigned> ageDist (18,70);
 
 class Crew {
 public:
@@ -34,15 +35,14 @@ private:
     void killWeapon();
     void killCrew();
 
-    Officer generateOfficer(int lower,int upper);
+    void generateOfficer(int lower,int upper);
 
 
     string names [19] = {"Aaren", "Aarez","Alum", "Alvern", "Jorge", "Joris", "Jorry", "Keeton", "Kehinde", "Keiga","Leo",
                        "Leon", "Leona","Milosz", "Mir", "Mirza", "Mitch","Zac","Zubair"};
 };
 
-static uniform_int_distribution<unsigned> firstNameDist (0,19);
-static uniform_int_distribution<unsigned> ageDist (18,70);
+
 
 
 

@@ -13,9 +13,10 @@
 
 class Engine{
 public:
-    Engine() {}
 
-    const string &getName() const {
+    Engine(const std::string &name, int critChance, int evasion) : name(name), critChance(critChance), evasion(evasion) {}
+
+    const std::string &getName() const {
         return name;
     }
 
@@ -32,8 +33,6 @@ private:
     int critChance;
     int evasion;
 
-protected:
-    Engine(const string &name, int critChance, int evasion) : name(name), critChance(critChance), evasion(evasion) {}
 
 };
 

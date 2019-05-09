@@ -4,6 +4,4 @@
 
 #include "Ship.h"
 
-Ship::Ship() {
-    Hull::generateHulls();
-}
+

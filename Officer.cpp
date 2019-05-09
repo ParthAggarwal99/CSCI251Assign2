@@ -33,23 +33,23 @@ int Officer::getAge() const {
     return age;
 }
 
-double SkillSet::getNegotiation() const {
+int SkillSet::getNegotiation() const {
     return negotiation;
 }
 
-double SkillSet::getPiloting() const {
+int SkillSet::getPiloting() const {
     return piloting;
 }
 
-double SkillSet::getEngineering() const {
+int SkillSet::getEngineering() const {
     return engineering;
 }
 
-double SkillSet::getMining() const {
+int SkillSet::getMining() const {
     return mining;
 }
 
-double SkillSet::getWeapons() const {
+int SkillSet::getWeapons() const {
     return weapons;
 }
 

@@ -9,7 +9,7 @@
  *
  */
 
-
+    //Generate first set Of officers for crew;
     Crew::Crew() :  captain(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)) ,
                     pilot(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
                     engineer(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),

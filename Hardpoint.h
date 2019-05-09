@@ -11,11 +11,18 @@
  * Damage & accuracy to be tuned based off avg enemy health / fight time
  *
  *
- * Mining will have a bass drop of 3, mining efficiency is a multiplier to the base drop chance
+ * Mining will have a bass drop of 1, mining efficiency is a multiplier to the base drop chance
  */
 
 class Hardpoint{
 public:
+    Hardpoint(const std::string &name, int damage, int critChance, int accuracy, int miningEff) : name(name),
+                                                                                                  damage(damage),
+                                                                                                  critChance(
+                                                                                                          critChance),
+                                                                                                  accuracy(accuracy),
+                                                                                                  miningEff(
+                                                                                                          miningEff) {}
 
     const std::string &getName() const {
         return name;
@@ -32,8 +39,9 @@ public:
     int getAccuracy() const {
         return accuracy;
     }
-    int getMiningEfficiency() const {
-        return miningEfficiency;
+
+    int getMiningEff() const {
+        return miningEff;
     }
 
 private:
@@ -41,7 +49,7 @@ private:
     int damage;
     int critChance;
     int accuracy;
-    int miningEfficiency;
+    int miningEff;
 };
 
 class MiningLasers: public Hardpoint{
@@ -50,7 +58,7 @@ private:
     const int damage = 100;
     const int critChance = 20;
     const int accuracy = 85;
-    const double miningEfficiency = 1;
+    const int miningEfficiency = 3;
 
 };
 
@@ -60,7 +68,7 @@ private:
     const int damage = 200;
     const int critChance = 85;
     const int accuracy = 90;
-    const double miningEfficiency = 1.00/3;
+    const int miningEfficiency = 1;
 };
 
 class darters: public Hardpoint{
@@ -69,7 +77,7 @@ private:
     const int damage = 350;
     const int critChance = 40;
     const int accuracy = 95;
-    const double miningEfficiency = 2.00/3;
+    const int miningEfficiency = 2;
 };
 
 class Missiles: public Hardpoint{
@@ -78,7 +86,7 @@ private:
     const int damage = 500;
     const int critChance = 20;
     const int accuracy = 70;
-    const double miningEfficiency = 1.00/3;
+    const int miningEfficiency = 1;
 };
 
 #endif //CSCI251ASSIGN2_WEAPONS_H

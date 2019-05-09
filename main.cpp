@@ -3,9 +3,10 @@
  * STUDENT ID: 6137210
  * LAB: FRIDAY 10:30
  */
+
+using namespace std;
 #include <iostream>
-#include "Crew.h"
-#include "Engine.h"
+#include "ShipBuilder.h"
 
 /**
  * TODO:
@@ -14,6 +15,13 @@
 
 int main() {
 
+    fillLists();
+
+    Hull * hull;
+
+    hull = getHull();
+
+    cout<<hull->getName()<<endl;
 
     return 0;
 }
