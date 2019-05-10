@@ -9,18 +9,18 @@ class SkillSet {
 public:
     SkillSet(int lower,int upper);
 
-    double getNegotiation() const;
-    double getPiloting() const;
-    double getEngineering() const;
-    double getMining() const;
-    double getWeapons() const;
+    int getNegotiation() const;
+    int getPiloting() const;
+    int getEngineering() const;
+    int getMining() const;
+    int getWeapons() const;
 
 private:
-    double negotiation;
-    double piloting;
-    double engineering;
-    double mining;
-    double weapons;
+    int negotiation;
+    int piloting;
+    int engineering;
+    int mining;
+    int weapons;
 
 };
 #endif //CSCI251ASSIGN2_SKILLSET_H
