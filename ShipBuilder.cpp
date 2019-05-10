@@ -16,10 +16,10 @@ void fillLists(){
     hullList.push_back(Hull("Combat Hull",30,20,30,15));
     hullList.push_back(Hull("Cargo Hull",50,50,100,40));
 
-    hpList.push_back(Hardpoint("Mining Lasers",100,20,85,3));
-    hpList.push_back(Hardpoint("Crit Cannons",200,85,90,1));
-    hpList.push_back(Hardpoint("Twin Darter Lasers",350,40,95,2));
-    hpList.push_back(Hardpoint("B5 Missile Launcher",500,20,70,1));
+    hpList.push_back(Hardpoint("Mining Lasers",150,20,85,3));
+    hpList.push_back(Hardpoint("Crit Cannons",125,95,90,1));
+    hpList.push_back(Hardpoint("Twin Darter Lasers",225,40,95,2));
+    hpList.push_back(Hardpoint("B5 Missile Launcher",300,20,65,1));
 
     engineList.push_back(Engine("Swift Lite",5,15));
     engineList.push_back(Engine("MK4 InterSector Jumper",20,5));
