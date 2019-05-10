@@ -5,11 +5,27 @@
 #ifndef CSCI251ASSIGN2_SECTOR_H
 #define CSCI251ASSIGN2_SECTOR_H
 
+#include <random>
+#include "string"
+
+
+/**
+ *  Arrive() is called when a player enters a new sector
+ *      returns a brief introduction and tells player their options
+ */
+static std::default_random_engine random_engine(time(0));
 class Sector{
 public:
+    Sector(const std::string &name, int escapeChance) : name(name), escapeChance(escapeChance) {}
 
-private:
-
+    virtual std::string arrive();
+    virtual std::string interact();
+    bool escape();
+protected:
+    std::string name;
+    int escapeChance;
 };
+
+
 
 #endif //CSCI251ASSIGN2_SECTOR_H
