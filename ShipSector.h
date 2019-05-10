@@ -16,7 +16,7 @@ class ShipSector: public Sector {
 public:
     ShipSector(const std::string &name, int escapeChance);
     std::string arrive();
-    std::string interact();
+    std::string interactOptions();
 private:
 
 };

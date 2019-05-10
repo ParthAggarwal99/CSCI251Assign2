@@ -6,6 +6,7 @@
 #define CSCI251ASSIGN2_SECTOR_H
 
 #include <random>
+#include <time.h>
 #include "string"
 
 
@@ -19,7 +20,7 @@ public:
     Sector(const std::string &name, int escapeChance) : name(name), escapeChance(escapeChance) {}
 
     virtual std::string arrive();
-    virtual std::string interact();
+    virtual std::string interactOptions();
     bool escape();
 protected:
     std::string name;
