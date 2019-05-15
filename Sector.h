@@ -19,8 +19,9 @@ class Sector{
 public:
     Sector(const std::string &name, int escapeChance) : name(name), escapeChance(escapeChance) {}
 
-    virtual std::string arrive();
-    virtual std::string interactOptions();
+//    virtual std::string arrive();
+//    virtual std::string interactOptions();
+//    virtual std::string interact();
     bool escape();
 protected:
     std::string name;

@@ -3,13 +3,17 @@
 //
 
 #include "ShipBuilder.h"
-
+#include <cstdlib>
+#include <time.h>
+#include "iostream"
+using namespace std;
 /**
  * Generate objects and populate lists of ship parts to be pulled from later when generating ships
  */
 std::vector<Hull> hullList;
 std::vector<Hardpoint> hpList;
 std::vector<Engine> engineList;
+
 
 void fillLists(){
     hullList.push_back(Hull("Heavy Hull",100,100,50,30));
@@ -25,8 +29,19 @@ void fillLists(){
     engineList.push_back(Engine("MK4 InterSector Jumper",20,5));
     engineList.push_back(Engine("Lawnmower Engine",10,10));
 
+    srand(time(0));
+
 }
 
-Hull * getHull(){
-    return & hullList[1];
+
+Hull * makeHull(){
+    return & hullList[rand()%3];
+}
+
+Hardpoint *makeHardPoint() {
+    return & hpList[rand()%4];
+}
+
+Engine *makeEngine() {
+    return & engineList[rand()%3];
 }

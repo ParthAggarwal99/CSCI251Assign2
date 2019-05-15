@@ -5,3 +5,11 @@
 #include "CombatManager.h"
 
 CombatManager::CombatManager(Ship *ship, Enemy *enemy) : ship(ship), enemy(enemy) {}
+
+
+void CombatManager::beginInstance() {
+    std::cout<<"YOU HAVE ENTERED COMBAT"<<endl;
+    bool escapetry = false;
+
+
+}

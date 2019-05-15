@@ -3,13 +3,24 @@
 //
 
 #include "Officer.h"
-#include "SkillSet.h"
-#include "random"
 
 
+string names [19] = {"Aaren", "Aarez","Alum", "Alvern", "Jorge", "Joris", "Jorry", "Keeton", "Kehinde", "Keiga","Leo",
+                     "Leon", "Leona","Milosz", "Mir", "Mirza", "Mitch","Zac","Zubair"};
 
-Officer::Officer(const string &name, int age, const SkillSet skillset) : name(name), age(age), skillset(skillset) {}
 
+Officer::Officer(const string &name, int age, const SkillSet skillset) : name(name), age(age), skillSet(skillset) {}
+
+
+Officer::Officer() {
+    srand(time(0));
+    try {
+        name = names[rand() % 20];
+    }catch(std::out_of_range){
+        cerr<<"OUT OF RANGE @ OFFICER CONSTRUCTOR"<<endl;
+    }
+    age = rand()%52 + 18;
+}
 
 
 SkillSet::SkillSet(int upper,int lower) {
@@ -20,6 +31,17 @@ SkillSet::SkillSet(int upper,int lower) {
     mining = OfficerDistribution(randEng);
     weapons = OfficerDistribution(randEng);
 }
+
+SkillSet::SkillSet() {
+    std::uniform_int_distribution<unsigned> OfficerDistribution(70,100);
+    negotiation = OfficerDistribution(randEng);
+    piloting = OfficerDistribution(randEng);
+    engineering = OfficerDistribution(randEng);
+    mining = OfficerDistribution(randEng);
+    weapons = OfficerDistribution(randEng);
+}
+
+
 
 
 //region Getters
@@ -54,6 +76,7 @@ int SkillSet::getWeapons() const {
 }
 
 const SkillSet &Officer::getSkillset() const {
-    return skillset;
+    return skillSet;
 }
+
 //endregion

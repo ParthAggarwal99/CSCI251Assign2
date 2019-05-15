@@ -19,7 +19,15 @@ static uniform_int_distribution<unsigned> ageDist (18,70);
 class Crew {
 public:
     Crew();
+    int getCrewSize() const;
     string casualty();
+
+    Officer * getCaptain();
+    Officer * getPilot();
+    Officer * getEngineer();
+    Officer * getMiner();
+    Officer * getWeaponSmith();
+
 private:
     Officer captain;
     Officer pilot;
@@ -38,8 +46,7 @@ private:
     void generateOfficer(int lower,int upper);
 
 
-    string names [19] = {"Aaren", "Aarez","Alum", "Alvern", "Jorge", "Joris", "Jorry", "Keeton", "Kehinde", "Keiga","Leo",
-                       "Leon", "Leona","Milosz", "Mir", "Mirza", "Mitch","Zac","Zubair"};
+
 };
 
 

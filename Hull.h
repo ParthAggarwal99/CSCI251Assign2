@@ -16,7 +16,7 @@
  *
  * ARMOR:
  *      Armor provides a flat % damage resist based on an exponential curve
- *      Curve formula f(x) = 100 / (100+.4X)
+ *      Curve formula f(x) = 100 / (100+.4x)
  *
  * WEIGHT:
  *      Weight determines manuvourability and fuel cost for jumps

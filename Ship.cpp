@@ -3,5 +3,90 @@
 //
 
 #include "Ship.h"
+int maxFuel = 20;
+int health = 1000;
+int money = 1000;
+int fuel = 50;
+
+Ship::Ship() {
+    std::cout<<"BEGINING CREATION"<<endl;
+    try {
+        hull = makeHull();
+        engine = makeEngine();
+        hardpoint = makeHardPoint();
+    }catch(exception exception1){
+        cout<<"exception1 "<<endl;
+    }
+
+
+
+    std::cout<<"SHIP CREATED"<<endl;
+    std::cout<<"ENGINE      : "<<engine->getName()<<endl;
+    std::cout<<"HULL        : "<<hull->getName()<<endl;
+    std::cout<<"HARDPOINT   : "<<hardpoint->getName()<<endl;
+}
+
+int Ship::getHealth() const {
+    return health;
+}
+
+int Ship::getMoney() const {
+    return money;
+}
+
+int Ship::getFuel() const {
+    return fuel;
+}
+
+void Ship::minusHealth(int i) {
+    health -=i;
+}
+
+void Ship::minusMoney(int i) {
+    money-=i;
+}
+
+void Ship::minusFuel(int i) {
+    fuel-=i;
+}
+
+void Ship::refuel() {
+    fuel = maxFuel;
+}
+
+void Ship::repair() {
+    fuel--;
+    health+=250;
+    //checks if health is over 1000, if so sets back at 1000
+    health = health>1000? 1000:health;
+}
+
+void Ship::minusFood() {
+
+}
+
+void Ship::refillFood() {
+
+}
+
+int Ship::getFood() const {
+    return food;
+}
+
+Hull *Ship::getHull() const {
+    return hull;
+}
+
+Hardpoint *Ship::getHardpoint() const {
+    return hardpoint;
+}
+
+Engine *Ship::getEngine() const {
+    return engine;
+}
+
+Crew *Ship::getCrew() {
+    return &crew;
+}
 
 

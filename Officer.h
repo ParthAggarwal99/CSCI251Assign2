@@ -17,6 +17,8 @@ using namespace std;
 
 class Officer {
 public:
+    Officer();
+
     Officer(const string &name, int age, const SkillSet skillset);
     const SkillSet &getSkillset() const;
     const string &getName() const;
@@ -24,7 +26,7 @@ public:
 private:
     string name;
     int age;
-    SkillSet skillset;
+    SkillSet skillSet;
 };
 
 #endif //CSCI251ASSIGN2_OFFICER_H

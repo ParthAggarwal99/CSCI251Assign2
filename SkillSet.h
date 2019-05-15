@@ -7,6 +7,8 @@
 
 class SkillSet {
 public:
+    SkillSet();
+
     SkillSet(int lower,int upper);
 
     int getNegotiation() const;

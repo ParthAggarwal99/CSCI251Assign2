@@ -15,10 +15,9 @@ extern std::vector<Hardpoint> hpList;
 extern std::vector<Engine> engineList;
 
 void fillLists();
-
-Hull * getHull();
-Hardpoint * getHardpoint();
-Engine * getEngine();
+Hull * makeHull();
+Hardpoint * makeHardPoint();
+Engine * makeEngine();
 
 
 

@@ -8,17 +8,48 @@
  * create casualty related functions
  *
  */
-
-    //Generate first set Of officers for crew;
-    Crew::Crew() :  captain(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)) ,
-                    pilot(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
-                    engineer(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
-                    miner (names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
-                    weaponSmith(names[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)){
-
-    }
+string namesList [19] = {"Aaren", "Aarez","Alum", "Alvern", "Jorge", "Joris", "Jorry", "Keeton", "Kehinde", "Keiga","Leo",
+                     "Leon", "Leona","Milosz", "Mir", "Mirza", "Mitch","Zac","Zubair"};
 
 
+Crew::Crew() {
+    cout<<"CREATING CREW"<<endl;
+}
+//Officer now works off a default constructor meaning there is no longer a need for this.
+//Generate first set Of officers for crew;
+//    Crew::Crew() :  captain(namesList[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)) ,
+//                    pilot(namesList[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
+//                    engineer(namesList[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
+//                    miner (namesList[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)),
+//                    weaponSmith(namesList[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)){
+//
+//    }
+
+
+
+int Crew::getCrewSize() const {
+    return crewSize;
+}
+
+Officer *Crew::getCaptain() {
+    return &captain;
+}
+
+Officer *Crew::getPilot() {
+    return &pilot;
+}
+
+Officer *Crew::getEngineer() {
+    return &engineer;
+}
+
+Officer *Crew::getMiner() {
+    return &miner;
+}
+
+Officer *Crew::getWeaponSmith() {
+    return &weaponSmith;
+}
 
 
 string casualty(void (*functocall)(string)){
