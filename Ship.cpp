@@ -54,9 +54,24 @@ void Ship::refuel() {
     fuel = maxFuel;
 }
 
-void Ship::repair() {
-    fuel--;
-    health+=250;
+/**
+ * base repair is 150
+ * repair amount is increased by engineers skill level * 2
+ * if in combat repair is half effective
+ * @param inCombat
+ */
+void Ship::repair(bool inCombat) {
+    int repairAmount = 150;
+    repairAmount += (crew.getEngineer()->getSkillset().getEngineering())*2;
+    repairAmount = inCombat? repairAmount/2 : repairAmount;
+    health+=repairAmount;
+    if(health>1000){
+        int difference = health -1000;
+        repairAmount -= difference;
+        cout<<"THE SHIP HAS BEEN REPAIRED FOR "<<repairAmount<<endl;
+    }else{
+        cout<<"THE SHIP HAS BEEN REPAIRED FOR "<<repairAmount<<endl;
+    }
     //checks if health is over 1000, if so sets back at 1000
     health = health>1000? 1000:health;
 }

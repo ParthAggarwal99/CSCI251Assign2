@@ -26,7 +26,7 @@ public:
     void minusFood();
 
     void refuel();
-    void repair();
+    void repair(bool inCombat);
     void refillFood();
 
     int getFood() const;
