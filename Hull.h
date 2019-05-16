@@ -46,7 +46,6 @@ public:
                                                                                                      peopleCapacity(
                                                                                                              peopleCapacity) {}
 
-
     int getArmor() const {
         return armor;
     }
@@ -67,15 +66,10 @@ public:
         return name;
     }
 
-    double getHp() const {
-        return hp;
-    }
-
     static Hull* pickHull(int i);
 
 private:
     std::string name;
-    double hp = 1000;
     int armor;
     int weight;
     int cargoCapacity;
