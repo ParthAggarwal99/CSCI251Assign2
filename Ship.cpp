@@ -15,10 +15,10 @@ Ship::Ship() {
         cout<<"exception1 "<<endl;
     }
 
-    int maxFuel = 20;
-    int health = 1000;
-    int money = 1000;
-    int fuel = 50;
+    maxFuel = 20;
+    health = 1000;
+    money = 1000;
+    fuel = 50;
 
 
     std::cout<<"SHIP CREATED"<<endl;
