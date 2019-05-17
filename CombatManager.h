@@ -18,6 +18,7 @@ private:
     struct DamageContainer{
     int damage;
     bool hit;
+    int critChance;
     bool crit;
     };
 
@@ -25,9 +26,10 @@ private:
     Ship * ship;
     Enemy * enemy;
 
-    dCont attack();
-
-
+    void attack();
+    void emergencyRepair();
+    bool escape();
+    void enemyAttack();
 
 };
 

@@ -32,10 +32,10 @@ public:
     int getFood() const;
 
     Hull *getHull() const;
-
     Hardpoint *getHardpoint() const;
-
     Engine *getEngine() const;
+
+    void printCombatStats();
 
 private:
     Crew crew;
@@ -47,6 +47,7 @@ private:
     int money;
     int fuel;
     int food;
+    int maxFuel;
 
 
 

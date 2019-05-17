@@ -3,10 +3,7 @@
 //
 
 #include "Ship.h"
-int maxFuel = 20;
-int health = 1000;
-int money = 1000;
-int fuel = 50;
+
 
 Ship::Ship() {
     std::cout<<"BEGINING CREATION"<<endl;
@@ -18,6 +15,10 @@ Ship::Ship() {
         cout<<"exception1 "<<endl;
     }
 
+    int maxFuel = 20;
+    int health = 1000;
+    int money = 1000;
+    int fuel = 50;
 
 
     std::cout<<"SHIP CREATED"<<endl;
@@ -74,6 +75,7 @@ void Ship::repair(bool inCombat) {
     }
     //checks if health is over 1000, if so sets back at 1000
     health = health>1000? 1000:health;
+    cout<<"YOU NOW HAVE "<<health<<" HEALTH"<<endl<<endl;
 }
 
 void Ship::minusFood() {
@@ -102,6 +104,16 @@ Engine *Ship::getEngine() const {
 
 Crew *Ship::getCrew() {
     return &crew;
+}
+
+void Ship::printCombatStats() {
+    cout<<"YOUR COMBAT STATS"<<endl;
+    cout<<"hp: "<<health<<endl;
+    cout<<"damage: "<<hardpoint->getDamage()<<endl;
+    cout<<"crit: "<<hardpoint->getCritChance()<<endl;
+    cout<<"accuracy: "<<hardpoint->getAccuracy()<<endl;
+    cout<<"armor: "<<hull->getArmor()<<endl<<endl;
+
 }
 
 

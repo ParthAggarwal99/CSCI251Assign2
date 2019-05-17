@@ -8,7 +8,7 @@ using namespace std;
 #include <iostream>
 #include "Ship.h"
 #include "Enemy.h"
-
+#include "CombatManager.h"
 /**
  * TODO:
  *  find out how to do getters for inherited classes
@@ -29,17 +29,19 @@ int main() {
     fillLists();
 
     Ship ship1;
-
-    printOfficer(ship1.getCrew()->getCaptain());
-
     Enemy enemy1;
-    enemy1.printStats();
 
-    enemy1.randomizeStats(2);
-    enemy1.printStats();
+    CombatManager cm = CombatManager(&ship1,&enemy1);
 
-    enemy1.randomizeStats(50);
-    enemy1.printStats();
+    cm.beginInstance();
+
+    enemy1.randomizeStats(25);
+
+    cm=CombatManager(&ship1,&enemy1);
+
+    cm.beginInstance();
+
+
 
 //    Officer o;
 //    cout<<o.getName()<<" "<<o.getAge()<<endl;
