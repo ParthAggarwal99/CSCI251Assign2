@@ -6,7 +6,6 @@
 
 
 Ship::Ship() {
-    std::cout<<"BEGINING CREATION"<<endl;
     try {
         hull = makeHull();
         engine = makeEngine();
@@ -24,7 +23,7 @@ Ship::Ship() {
     std::cout<<"SHIP CREATED"<<endl;
     std::cout<<"ENGINE      : "<<engine->getName()<<endl;
     std::cout<<"HULL        : "<<hull->getName()<<endl;
-    std::cout<<"HARDPOINT   : "<<hardpoint->getName()<<endl;
+    std::cout<<"HARDPOINT   : "<<hardpoint->getName()<<endl<<endl;
 }
 
 int Ship::getHealth() const {
