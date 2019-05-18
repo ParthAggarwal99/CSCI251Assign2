@@ -44,6 +44,10 @@ public:
         return miningEff;
     }
 
+    void increaseDamage(int i) {
+        damage+=100;
+    }
+
 private:
     std::string name;
     int damage;
@@ -52,41 +56,5 @@ private:
     int miningEff;
 };
 
-class MiningLasers: public Hardpoint{
-private:
-    const std::string name = "Mining Lasers";
-    const int damage = 100;
-    const int critChance = 20;
-    const int accuracy = 85;
-    const int miningEfficiency = 3;
-
-};
-
-class CritCannons: public Hardpoint{
-private:
-    const std::string name = "Crit Cannons";
-    const int damage = 200;
-    const int critChance = 85;
-    const int accuracy = 90;
-    const int miningEfficiency = 1;
-};
-
-class darters: public Hardpoint{
-private:
-    const std::string name = "22 Twin Darter Lasers";
-    const int damage = 350;
-    const int critChance = 40;
-    const int accuracy = 95;
-    const int miningEfficiency = 2;
-};
-
-class Missiles: public Hardpoint{
-private:
-    const std::string name = "B5 Missile Launcher";
-    const int damage = 500;
-    const int critChance = 20;
-    const int accuracy = 70;
-    const int miningEfficiency = 1;
-};
 
 #endif //CSCI251ASSIGN2_WEAPONS_H

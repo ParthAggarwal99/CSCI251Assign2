@@ -16,10 +16,12 @@ Ship::Ship() {
 
     maxFuel = 20;
     health = 1000;
+    maxHealth = 1000;
     money = 1000;
     fuel = 50;
+    food = 25;
 
-
+    crew.setCrewSize(hull->getPeopleCapacity());
     std::cout<<"SHIP CREATED"<<endl;
     std::cout<<"ENGINE      : "<<engine->getName()<<endl;
     std::cout<<"HULL        : "<<hull->getName()<<endl;
@@ -42,8 +44,12 @@ void Ship::minusHealth(int i) {
     health -=i;
 }
 
-void Ship::minusMoney(int i) {
-    money-=i;
+bool Ship::minusMoney(int i) {
+    if(money-i>0){
+        money-=i;
+        return true;
+    }
+    return false;
 }
 
 void Ship::minusFuel(int i) {
@@ -51,6 +57,7 @@ void Ship::minusFuel(int i) {
 }
 
 void Ship::refuel() {
+    cout<<"SHIP REFUELED"<<endl;
     fuel = maxFuel;
 }
 
@@ -65,24 +72,24 @@ void Ship::repair(bool inCombat) {
     repairAmount += (crew.getEngineer()->getSkillset().getEngineering())*2;
     repairAmount = inCombat? repairAmount/2 : repairAmount;
     health+=repairAmount;
-    if(health>1000){
-        int difference = health -1000;
+    if(health>maxHealth){
+        int difference = health -maxHealth;
         repairAmount -= difference;
         cout<<"THE SHIP HAS BEEN REPAIRED FOR "<<repairAmount<<endl;
     }else{
         cout<<"THE SHIP HAS BEEN REPAIRED FOR "<<repairAmount<<endl;
     }
-    //checks if health is over 1000, if so sets back at 1000
-    health = health>1000? 1000:health;
+    //checks if health is over max Health, if so sets back to max Health
+    health = health>maxHealth? maxHealth:health;
     cout<<"YOU NOW HAVE "<<health<<" HEALTH"<<endl<<endl;
 }
 
 void Ship::minusFood() {
-
+    food--;
 }
 
 void Ship::refillFood() {
-
+    food = 25;
 }
 
 int Ship::getFood() const {
@@ -113,6 +120,38 @@ void Ship::printCombatStats() {
     cout<<"accuracy: "<<hardpoint->getAccuracy()<<endl;
     cout<<"armor: "<<hull->getArmor()<<endl<<endl;
 
+}
+
+void Ship::printCoreStats() {
+    cout<<"YOUR CORE STATS"<<endl;\
+    cout<<money<<"$"<<endl;
+    cout<<"hp: "<<health<<endl;
+    cout<<"food: "<<food<<endl;
+    cout<<"fuel: "<<fuel<<endl;
+    cout<<"armor: "<<hull->getArmor()<<endl;
+}
+
+int Ship::getOre() const {
+    return ore;
+}
+
+bool Ship::addOre(int i) {
+    ore += i;
+
+    if(ore > hull->getCargoCapacity()){
+        ore = hull->getCargoCapacity();
+        cout<<"CARGO AT CAPACITY"<<endl;
+    }
+    cout<<"YOU NOW HAVE "<<ore<<" ORE"<<endl;
+}
+
+void Ship::addMoney(int i) {
+    money+=money;
+}
+
+void Ship::addMaxHp(int i) {
+    maxHealth+=i;
+    health=maxHealth;
 }
 
 

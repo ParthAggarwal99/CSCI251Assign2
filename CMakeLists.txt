@@ -3,4 +3,4 @@ project(CSCI251Assign2)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(CSCI251Assign2 main.cpp Crew.cpp Crew.h Officer.cpp Officer.h SkillSet.h Sector.h Ship.cpp Ship.h ShipBuilder.cpp ShipBuilder.h Hull.h Hardpoint.h Engine.h ShipSector.cpp ShipSector.h Sector.h PlanetSector.cpp PlanetSector.h CombatManager.cpp CombatManager.h Enemy.cpp Enemy.h)
+add_executable(CSCI251Assign2 main.cpp Crew.cpp Crew.h Officer.cpp Officer.h SkillSet.h Sector.h Sector.cpp Ship.cpp Ship.h ShipBuilder.cpp ShipBuilder.h Hull.h Hardpoint.h Engine.h Sector.h CombatManager.cpp CombatManager.h Enemy.cpp Enemy.h Alien.cpp Alien.h)

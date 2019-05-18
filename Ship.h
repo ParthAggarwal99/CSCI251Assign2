@@ -14,14 +14,18 @@ public:
     Ship();
 
     Crew * getCrew();
+
+    bool addOre(int i);
+    void addMoney(int i);
+    void addMaxHp(int i);
+
     int getHealth() const;
-
     int getMoney() const;
-
     int getFuel() const;
+    int getFood() const;
 
     void minusHealth(int i);
-    void minusMoney(int i);
+    bool minusMoney(int i);
     void minusFuel(int i);
     void minusFood();
 
@@ -29,13 +33,14 @@ public:
     void repair(bool inCombat);
     void refillFood();
 
-    int getFood() const;
+
 
     Hull *getHull() const;
     Hardpoint *getHardpoint() const;
     Engine *getEngine() const;
 
     void printCombatStats();
+    void printCoreStats();
 
 private:
     Crew crew;
@@ -44,11 +49,14 @@ private:
     Engine * engine;
 
     int health;
+    int maxHealth;
     int money;
     int fuel;
     int food;
     int maxFuel;
-
+    int ore;
+public:
+    int getOre() const;
 
 
 };

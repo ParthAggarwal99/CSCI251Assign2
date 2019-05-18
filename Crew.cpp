@@ -51,6 +51,10 @@ Officer *Crew::getWeaponSmith() {
     return &weaponSmith;
 }
 
+void Crew::setCrewSize(int crewSize) {
+    Crew::crewSize = crewSize;
+}
+
 
 string casualty(void (*functocall)(string)){
     cout<< (*functocall)<<endl;

@@ -19,11 +19,15 @@ public:
 
     int getCombatAbility() const;
 
+
+    void printStats();
+
 private:
     std::string name;
     bool hostile;
     bool trade;
     int combatAbility;
+    std::string desc;
 };
 
 

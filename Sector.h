@@ -8,26 +8,70 @@
 #include <random>
 #include <time.h>
 #include "string"
+#include "Enemy.h"
+#include "string"
+#include "Alien.h"
+#include "Ship.h"
+#include "CombatManager.h"
 
-
-/**
- *  Arrive() is called when a player enters a new sector
- *      returns a brief introduction and tells player their options
- */
-static std::default_random_engine random_engine(time(0));
 class Sector{
 public:
-    Sector(const std::string &name, int escapeChance) : name(name), escapeChance(escapeChance) {}
+    Sector(Ship * ship,int counter);
+    virtual ~Sector();
+    bool escape(int skillLevel);
+    virtual void arrive();
+    virtual int options();
+    virtual std::string interact();
+    const Alien &getRace() const;
 
-//    virtual std::string arrive();
-//    virtual std::string interactOptions();
-//    virtual std::string interact();
-    bool escape();
 protected:
     std::string name;
-    int escapeChance;
+    Alien race;
+    Ship * ship;
+    int counter;
+
+    void trade();
+    bool rollTrade();
+    void mine();
 };
 
 
+class ShipSector: public Sector {
+public:
+    ShipSector(Ship *ship, int counter);
+
+    void arrive();
+    int options();
+    Enemy * getEnemy();
+private:
+    Enemy enemy;
+};
+
+class PlanetSector: public Sector{
+public:
+    PlanetSector(Ship *ship, int counter);
+
+    void arrive();
+    int options();
+    Enemy * getEnemy();
+private:
+    Enemy enemy;
+};
+
+class TradingSector: public Sector{
+public:
+    void arrive();
+    int options();
+private:
+};
+
+class EmptySector: public Sector{
+    void arrive();
+    int options();
+};
+class AstroidSector: public Sector{
+    void arrive();
+    int options();
+};
 
 #endif //CSCI251ASSIGN2_SECTOR_H

@@ -24,12 +24,17 @@ public:
 
     void printStats();
 
+    void enhance(int combat);
+
+    void minusHp(int i);
+
 private:
     std::default_random_engine enemyRand;
     int hp;
     int damage;
     int crit;
     int armor;
+    double scale;
 };
 
 

@@ -30,6 +30,11 @@ int main() {
 
     Ship ship1;
     Enemy enemy1;
+    bool active = true;
+
+    cout<<"WELCOME TO SPACE COMMANDER"<<endl;
+    system("pause");
+
 
     CombatManager cm = CombatManager(&ship1,&enemy1);
 
@@ -63,4 +68,8 @@ void printOfficer(Officer * o){
     cout<<o->getSkillset().getEngineering()<<endl;
     cout<<o->getSkillset().getMining()<<endl;
     cout<<o->getSkillset().getNegotiation()<<endl<<endl;
+}
+
+void createAliens(){
+
 }

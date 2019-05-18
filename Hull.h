@@ -66,7 +66,9 @@ public:
         return name;
     }
 
-    static Hull* pickHull(int i);
+    void increaseArmor(int i) {
+        armor+=i;
+    }
 
 private:
     std::string name;

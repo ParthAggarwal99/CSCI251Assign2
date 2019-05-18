@@ -19,7 +19,7 @@ void CombatManager::beginInstance() {
             "2::EMERGENCY REPAIR"<<endl<<
             "3::ATTEMPT ESCAPE"<<endl;
 
-        int option;
+        int option=0;
         try{
             cin>>option;
         }catch(exception& e){
@@ -39,6 +39,11 @@ void CombatManager::beginInstance() {
             default:
                 cout<<"THAT IS NOT A VALID TURN"<<endl;
         }
+        if(enemy->getHp()<=0){
+            getRewards();
+            engaged = false;
+        }
+
         if(engaged){
             enemyAttack();
             cout<<"HP: "<<ship->getHealth()<<endl;
@@ -74,7 +79,12 @@ void CombatManager::attack() {
         }else{
             cout<< "YOUR ATTACK HIT FOR "<<damage<<endl<<endl;
         }
+        enemy->minusHp(damage);
     }
+}
+
+void CombatManager::getRewards() {
+
 }
 
 void CombatManager::emergencyRepair() {
@@ -116,6 +126,7 @@ void CombatManager::enemyAttack() {
         }else{
             cout<< "THE ENEMY'S ATTACK HIT FOR "<<damage<<endl<<endl;
         }
+        ship->minusHealth(damage);
     }
 }
 

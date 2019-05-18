@@ -19,6 +19,9 @@ static uniform_int_distribution<unsigned> ageDist (18,70);
 class Crew {
 public:
     Crew();
+
+    void setCrewSize(int crewSize);
+
     int getCrewSize() const;
     string casualty();
 

@@ -30,7 +30,7 @@ private:
     void emergencyRepair();
     bool escape();
     void enemyAttack();
-
+    void getRewards();
 };
 
 

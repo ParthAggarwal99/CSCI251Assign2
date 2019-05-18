@@ -10,11 +10,12 @@ using namespace std;
 
 Enemy::Enemy() {
     randomizeStats(1);
+
 }
 
 void Enemy::randomizeStats(int counter) {
     std::cout<<"GENERATING NEW ENEMY"<<endl;
-    double scale =  pow(1.055,counter);
+    scale =  pow(1.055,counter);
     srand(time(0));
 
     hp = (rand()%201+200)*scale;
@@ -45,6 +46,15 @@ void Enemy::printStats() {
     cout<<"damage: "<<damage<<endl;
     cout<<"crit: "<<crit<<endl;
     cout<<"armor: "<<armor<<endl<<endl;
+}
+
+void Enemy::enhance(int combat) {
+    damage+= combat*scale;
+}
+
+void Enemy::minusHp(int i) {
+    hp-= i;
+
 }
 
 
