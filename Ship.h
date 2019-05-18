@@ -41,6 +41,7 @@ public:
 
     void printCombatStats();
     void printCoreStats();
+    void printTransportStats();
 
 private:
     Crew crew;

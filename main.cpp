@@ -10,20 +10,8 @@ using namespace std;
 #include "Enemy.h"
 #include "CombatManager.h"
 #include "Sector.h"
-/**
- * TODO:
- *  find out how to do getters for inherited classes
- */
 
-/**     BUG CHECK TIME :)
- * SHIP WORKS
- *   subclasses of Ship:
- *      Skillset Works
- *      Officer Works
- *      Crew Works
- *
- *
- */
+
 void printOfficer(Officer * o);
 bool shipIsGood(Ship * ship);
 int main() {
@@ -33,8 +21,19 @@ int main() {
     Sector * sector;
 
     ship.getCrew()->printCrew();
+    ship.printCoreStats();
     system("pause");
     do{
+        srand(time(0));
+        if(rand()%100<ship.getEngine()->getCritChance()){
+            cout<<"ENGINES CRITICALLY FIRED. TRANSPORT IS FREE";
+        }else{
+            ship.minusFood();
+            ship.minusFuel(1);
+        }
+
+        ship.printTransportStats();
+
         counter++;
 
         srand(time(0));
@@ -56,6 +55,7 @@ int main() {
         sector->options();
 
         delete sector;
+
     }while(shipIsGood(&ship));
 
     return 0;

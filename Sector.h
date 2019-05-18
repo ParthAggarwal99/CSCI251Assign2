@@ -21,9 +21,6 @@ public:
     bool escape(int skillLevel);
     virtual void arrive();
     virtual int options();
-    virtual std::string interact();
-    const Alien &getRace() const;
-
 protected:
     std::string name;
     Alien race;
@@ -42,7 +39,6 @@ public:
 
     void arrive();
     int options();
-    Enemy * getEnemy();
 private:
     Enemy enemy;
 };
@@ -50,26 +46,34 @@ private:
 class PlanetSector: public Sector{
 public:
     PlanetSector(Ship *ship, int counter);
-
     void arrive();
     int options();
-    Enemy * getEnemy();
 private:
     Enemy enemy;
 };
 
 class TradingSector: public Sector{
 public:
+    TradingSector(Ship *ship, int counter);
+
     void arrive();
     int options();
 private:
 };
 
 class EmptySector: public Sector{
+public:
+    EmptySector(Ship *ship, int counter);
+
+private:
     void arrive();
     int options();
 };
 class AstroidSector: public Sector{
+public:
+    AstroidSector(Ship *ship, int counter);
+
+private:
     void arrive();
     int options();
 };

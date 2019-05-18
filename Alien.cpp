@@ -78,4 +78,3 @@ cout<<"NAME: "<<name<<endl
 <<"COMBAT ABILITY: "<<combatAbility<<endl<<endl;
 }
 
-

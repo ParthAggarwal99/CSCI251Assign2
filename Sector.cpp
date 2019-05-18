@@ -2,27 +2,13 @@
 // Created by Anthony Suker on 2019-05-10.
 //
 #include <iostream>
+#include <limits.h>
 #include "Sector.h"
 
 
 using namespace std;
 
-/**
- * RETURN OPTIONS
- *
- *  00: do nothing
- *
- *  10: attempt trade
- *  11: purchase fuel
- *  12: purchase food
- *  13: sell ore
- *  14: buy dmg upgrade
- *  15: buy armor upgrade
- *  16: buy max health
- *
- *  20: intiate combat
- *
- */
+
 
 //region Base Sector
 
@@ -48,15 +34,14 @@ Sector::Sector(Ship *ship, int counter) {
 bool Sector::escape(int skillLevel) {
     srand(time(0));
     if (rand() % 101 > (skillLevel / 5)) {
+        cout<<"ESCAPE FAILED"<<endl;
         return false;
     } else {
+        cout<<"ESCAPE SUCCESS"<<endl;
         return true;
     }
 }
 
-const Alien &Sector::getRace() const {
-    return race;
-}
 
 void Sector::arrive() {
     cout << "you shouldn't see this" << endl;
@@ -66,49 +51,49 @@ int Sector::options() {
     cout << "you shouldn't see this" << endl;
 }
 
-std::string Sector::interact() {
-    return "you shouldn't see this";
-}
 
 void Sector::trade() {
-    ship->printCoreStats();
-
-    cout << "1::REFUEL - $75 " << endl
-         << "2::RESUPPLY FOOD - $75 " << endl
-         << "3::SELL ORE -  $200ea" << endl
-         << "4::BUY DMG UP - +75 @ $300" << endl
-         << "5::BUY ARMOR UP - +100 @ $ 500" << endl
-         << "6::BUY MAX HP UP (INCLUDES FULL REPAIR) - +500HP @ $750" << endl
-         << "0::LEAVE" << endl;
-
 
     int option;
     bool goodOption = true;
     do {
-        goodOption = true;
-        try {
-            cin >> option;
-        } catch (exception &e) {
-            goodOption = false;
-            cerr << "I DONT THINK THAT'S A NUMBER" << endl << e.what() << endl;
-        }
-    } while (!goodOption);
+        ship->printCoreStats();
+        cout << "1::REFUEL - $75 " << endl
+             << "2::RESUPPLY FOOD - $75 " << endl
+             << "3::SELL ORE -  $200ea" << endl
+             << "4::BUY DMG UP - +75 @ $300" << endl
+             << "5::BUY ARMOR UP - +100 @ $ 500" << endl
+             << "6::BUY MAX HP UP (INCLUDES FULL REPAIR) - +500HP @ $750" << endl
+             << "0::LEAVE" << endl;
+        do{
+            goodOption = true;
+            cin>>option;
+            if(cin.fail()){
+                goodOption = false;
+            }
+        }while(!goodOption);
 
-    srand(time(0));
-    bool critBuy = false;
-    int multiplier = 1;
-    srand(time(0));
-    if ((rand() % 1000) < ship->getCrew()->getCaptain()->getSkillset().getNegotiation()) {
-        if (option == 3) {
-            cout << "TRADING CRIT!!! ORE SOLD FOR DOUBLE VALUE" << endl;
-        } else {
-            cout << "TRADING CRIT!!! ITEM BOUGHT FOR FREE" << endl;
-        }
-        critBuy = true;
-        multiplier = 0;
-    }
 
-    do {
+        bool critBuy=false;
+        int multiplier=0;
+
+        if (option != 0) {
+            srand(time(0));
+            critBuy = false;
+            multiplier = 1;
+            srand(time(0));
+            if ((rand() % 1000) < ship->getCrew()->getCaptain()->getSkillset().getNegotiation()) {
+                if (option == 3) {
+                    cout << "TRADING CRIT!!! ORE SOLD FOR DOUBLE VALUE" << endl;
+                } else {
+                    cout << "TRADING CRIT!!! ITEM BOUGHT FOR FREE" << endl;
+                }
+                critBuy = true;
+                multiplier = 0;
+            }
+        }
+
+        goodOption = false;
         switch (option) {
 
             case 1:
@@ -148,15 +133,17 @@ void Sector::trade() {
                 if (ship->minusMoney(750)) {
                     ship->addMaxHp(500);
                 }
+                break;
 
             case 0:
                 cout << "YOU PURCHASE NOTHING AND MOVE ON TO THE NEXT SECTOR" << endl;
+                goodOption = true;
 
             default:
                 cout << "THAT IS NOT A VALID OPTION" << endl << endl;
 
         }
-    } while (option != 0);
+    } while (!goodOption);
 }
 
 bool Sector::rollTrade() {
@@ -174,15 +161,16 @@ bool Sector::rollTrade() {
 }
 
 void Sector::mine() {
+    cout<<"CARGO CURRENTLY AT: "<<ship->getOre();
     cout<<"YOU BEGIN TO MINE"<<endl;
     int yield = ship->getHardpoint()->getMiningEff();
     srand(time(0));
     for(int x = 0; x<ship->getCrew()->getCrewSize();x++){
-        if(rand()%151<ship->getCrew()->getMiner()->getSkillset().getMining()){
+        if(rand()%200<ship->getCrew()->getMiner()->getSkillset().getMining()){
             yield++;
-            cout<<"SUCCESS, YOU FOUND SOME ORE"<<endl;
+            cout<<"SUCCESS, YOU FOUND SOME ORE"<<" YIELD NOW AT "<<yield<<endl;
         } else{
-            cout<<"FAIL, YOU DID NOT FOUND ORE"<<endl;
+            cout<<"FAIL, YOU DID NOT FOUND ORE"<<" YIELD NOW AT "<<yield<<endl;
         }
     }
     ship->addOre(yield);
@@ -213,22 +201,24 @@ int ShipSector::options() {
     bool goodOption = true;
     do {
         goodOption = true;
-        try {
-            cin >> option;
-        } catch (exception &e) {
-            goodOption = false;
-            cerr << "I DONT THINK THAT'S A NUMBER" << endl << e.what() << endl;
-        }
+        do {
+            cin.clear();
+            cin.ignore(INT_MAX,'\n');
+            cin>>option;
+        } while (!cin.good());
 
         switch (option) {
             case 1: {
                 CombatManager cm = CombatManager(ship, &enemy);
-                cm.beginInstance();
+                if(cm.beginInstance()){
+                    ship->getCrew()->casualty(race.getName(),counter);
+                }
                 break;
             }
             case 2:{
                 ship->repair(false);
                 goodOption = false;
+                break;
             }
 
             case 3: {
@@ -237,33 +227,30 @@ int ShipSector::options() {
                 } else if (race.isHostile()) {
                     cout << "THEY DECLINE YOUR TRADE AND OPEN FIRE ON YOU" << endl;
                     CombatManager cm = CombatManager(ship, &enemy);
-                    cm.beginInstance();
+                    if(cm.beginInstance()){
+                        ship->getCrew()->casualty(race.getName(),counter);
+                    }
                 }
                 break;
             }
 
             case 4:{
                 race.printStats();
+                goodOption = false;
+                break;
             }
             case 0: {
-                escape(10);
+                goodOption = escape(ship->getCrew()->getPilot()->getSkillset().getPiloting());
                 break;
             }
 
             default:
                 goodOption = false;
                 cout << "THAT IS NOT A VALID OPTION" << endl;
-
+                break;
         }
     } while (!goodOption);
 }
-
-Enemy *ShipSector::getEnemy() {
-    return &enemy;
-}
-
-
-
 
 //endregion
 
@@ -288,34 +275,39 @@ int PlanetSector::options() {
     int option;
     bool goodOption = true;
     do {
-        goodOption = true;
-        try {
-            cin >> option;
-        } catch (exception &e) {
-            goodOption = false;
-            cerr << "I DONT THINK THAT'S A NUMBER" << endl << e.what() << endl;
-        }
+        do {
+            cin.clear();
+            cin.ignore(INT_MAX,'\n');
+            cin>>option;
+        } while (!cin.good());
 
         switch (option) {
             case 1: {
                 if (rollTrade()) {
                     trade();
-                } else if (race.isHostile()) {
-                    cout << "THEY DECLINE YOUR TRADE AND OPEN FIRE ON YOU" << endl;
-                    CombatManager cm = CombatManager(ship, &enemy);
-                    cm.beginInstance();
+                } else{
+                    if (race.isHostile()) {
+                        cout << "THEY DECLINE YOUR TRADE AND OPEN FIRE ON YOU" << endl;
+                        CombatManager cm = CombatManager(ship, &enemy);
+                        if (cm.beginInstance()) {
+                            ship->getCrew()->casualty(race.getName(), counter);
+                        }
+                    }else{
+                        cout << "THEY DECLINE YOUR TRADE" << endl;
+                    }
                 }
                 break;
             }
 
             case 2: {
                 CombatManager cm = CombatManager(ship, &enemy);
-                cm.beginInstance();
+                if(cm.beginInstance()){
+                    ship->getCrew()->casualty(race.getName(),counter);
+                }
                 break;
             }
 
             case 3: {
-                cout<<"YOU BEGIN TO MINE"<<endl;
                 mine();
                 break;
             }
@@ -332,14 +324,13 @@ int PlanetSector::options() {
     } while (!goodOption);
 }
 
-Enemy *PlanetSector::getEnemy() {
-    return &enemy;
-}
 
 //endregion
 
 
 //region TradingSector
+
+TradingSector::TradingSector(Ship *ship, int counter) : Sector(ship, counter) {}
 
 void TradingSector::arrive() {
     cout << "You arrive at a trading sector owned by the " << race.getName() << endl;
@@ -352,13 +343,12 @@ int TradingSector::options() {
     int option;
     bool goodOption = true;
     do {
-        goodOption = true;
-        try {
-            cin >> option;
-        } catch (exception &e) {
-            goodOption = false;
-            cerr << "I DONT THINK THAT'S A NUMBER" << endl << e.what() << endl;
-        }
+        do {
+            cin.clear();
+            cin.ignore(INT_MAX,'\n');
+            cin>>option;
+        } while (!cin.good());
+
 
         switch (option) {
             case 1:
@@ -375,13 +365,16 @@ int TradingSector::options() {
     } while (!goodOption);
 }
 
+
 //endregion
 
 
 //region Empty Sector
 
+EmptySector::EmptySector(Ship *ship, int counter) : Sector(ship, counter) {}
+
 void EmptySector::arrive() {
-    cout << "You arrive at an empty sector. There is nothing to do here." << endl;
+    cout << "You arrive at an empty sector." << endl;
 }
 
 int EmptySector::options() {
@@ -389,10 +382,13 @@ int EmptySector::options() {
     system("pause");
     return 00;
 }
+
 //endregion
 
 
 //region Astroid Sector
+
+AstroidSector::AstroidSector(Ship *ship, int counter) : Sector(ship, counter) {}
 
 void AstroidSector::arrive() {
     ship->minusHealth(50);
@@ -404,6 +400,7 @@ int AstroidSector::options() {
     system("pause");
     return 00;
 }
+
 //endregion
 
 

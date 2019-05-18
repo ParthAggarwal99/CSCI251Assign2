@@ -11,20 +11,12 @@
 class CombatManager {
 public:
     CombatManager(Ship *ship, Enemy *enemy);
-    void beginInstance();
+    bool beginInstance();
 
 private:
-
-    struct DamageContainer{
-    int damage;
-    bool hit;
-    int critChance;
-    bool crit;
-    };
-
-    typedef DamageContainer dCont;
     Ship * ship;
     Enemy * enemy;
+    bool casualty = false;
 
     void attack();
     void emergencyRepair();

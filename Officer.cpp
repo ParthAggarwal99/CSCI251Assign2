@@ -9,7 +9,6 @@ string names [19] = {"Aaren", "Aarez","Alum", "Alvern", "Jorge", "Joris", "Jorry
                      "Leon", "Leona","Milosz", "Mir", "Mirza", "Mitch","Zac","Zubair"};
 
 
-Officer::Officer(const string &name, int age, const SkillSet skillset) : name(name), age(age), skillSet(skillset) {}
 
 
 Officer::Officer() {
@@ -25,15 +24,6 @@ Officer::Officer() {
 }
 
 
-SkillSet::SkillSet(int upper,int lower) {
-    std::uniform_int_distribution<unsigned> OfficerDistribution(upper,lower);
-    negotiation = OfficerDistribution(randEng);
-    piloting = OfficerDistribution(randEng);
-    engineering = OfficerDistribution(randEng);
-    mining = OfficerDistribution(randEng);
-    weapons = OfficerDistribution(randEng);
-}
-
 SkillSet::SkillSet() {
     std::uniform_int_distribution<unsigned> OfficerDistribution(70,100);
     negotiation = OfficerDistribution(randEng);
@@ -43,6 +33,15 @@ SkillSet::SkillSet() {
     weapons = OfficerDistribution(randEng);
 }
 
+
+void SkillSet::reroll(int upper, int lower) {
+    std::uniform_int_distribution<unsigned> OfficerDistribution(upper,lower);
+    negotiation = OfficerDistribution(randEng);
+    piloting = OfficerDistribution(randEng);
+    engineering = OfficerDistribution(randEng);
+    mining = OfficerDistribution(randEng);
+    weapons = OfficerDistribution(randEng);
+}
 
 
 
@@ -87,5 +86,15 @@ void Officer::print() {
     <<" : M"<<skillSet.getMining()<<" : E"<<skillSet.getEngineering()
     <<" : W"<<skillSet.getWeapons()<<endl;
 }
+
+void Officer::reroll(int count) {
+    int upper = 100-(5*count);
+    int lower = 70 -(5*count);
+    skillSet.reroll(upper,lower);
+    std::uniform_int_distribution<unsigned> nameDist(0,18);
+    name = names[nameDist(randEng)];
+}
+
+
 
 //endregion

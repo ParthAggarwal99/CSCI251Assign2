@@ -20,11 +20,12 @@ class Crew {
 public:
     Crew();
 
+    virtual ~Crew();
+
     void printCrew();
     void setCrewSize(int crewSize);
-
     int getCrewSize() const;
-    string casualty();
+    void casualty(string killer,int turn);
 
     Officer * getCaptain();
     Officer * getPilot();
@@ -33,23 +34,15 @@ public:
     Officer * getWeaponSmith();
 
 private:
-    Officer captain;
-    Officer pilot;
-    Officer engineer;
-    Officer miner;
-    Officer weaponSmith;
+    Officer * captain;
+    Officer * pilot;
+    Officer * engineer;
+    Officer *  miner;
+    Officer * weaponSmith;
     int crewSize;
 
-    void killCaptain();
-    void killPilot();
-    void killEngineer();
-    void killMiner();
-    void killWeapon();
-    void killCrew();
 
-    void generateOfficer(int lower,int upper);
-
-
+    vector <string> log;
 
 };
 

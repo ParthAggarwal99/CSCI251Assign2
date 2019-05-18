@@ -156,4 +156,10 @@ void Ship::addMaxHp(int i) {
     health=maxHealth;
 }
 
+void Ship::printTransportStats() {
+    cout<<"hp: "<<health<<endl;
+    cout<<"food: "<<food<<endl;
+    cout<<"fuel: "<<fuel<<endl;
+}
+
 

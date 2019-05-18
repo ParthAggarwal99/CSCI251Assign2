@@ -8,13 +8,25 @@
  * create casualty related functions
  *
  */
-string namesList [19] = {"Aaren", "Aarez","Alum", "Alvern", "Jorge", "Joris", "Jorry", "Keeton", "Kehinde", "Keiga","Leo",
-                     "Leon", "Leona","Milosz", "Mir", "Mirza", "Mitch","Zac","Zubair"};
 
 
 Crew::Crew() {
     cout<<"CREATING CREW"<<endl;
+    captain = new Officer;
+    pilot = new Officer;
+    engineer = new  Officer;
+    miner = new Officer;
+    weaponSmith = new Officer;
 }
+
+Crew::~Crew() {
+    delete captain;
+    delete pilot;
+    delete engineer;
+    delete miner;
+    delete weaponSmith;
+}
+
 //Officer now works off a default constructor meaning there is no longer a need for this.
 //Generate first set Of officers for crew;
 //    Crew::Crew() :  captain(namesList[firstNameDist(randEng)],ageDist(randEng),SkillSet(60,100)) ,
@@ -32,23 +44,23 @@ int Crew::getCrewSize() const {
 }
 
 Officer *Crew::getCaptain() {
-    return &captain;
+    return captain;
 }
 
 Officer *Crew::getPilot() {
-    return &pilot;
+    return pilot;
 }
 
 Officer *Crew::getEngineer() {
-    return &engineer;
+    return engineer;
 }
 
 Officer *Crew::getMiner() {
-    return &miner;
+    return miner;
 }
 
 Officer *Crew::getWeaponSmith() {
-    return &weaponSmith;
+    return weaponSmith;
 }
 
 void Crew::setCrewSize(int crewSize) {
@@ -59,23 +71,58 @@ void Crew::printCrew() {
     cout<<"CREWSIZE = "<<crewSize;
     cout<<" ROLE  :  NAME  : NEGOTIATION:PILOTING:ENGINEERING:MINING:WEAPONS"<<endl;
     cout<<"CAPTAIN : ";
-    captain.print();
+    captain->print();
     cout<<"PILOT : ";
-    pilot.print();
+    pilot->print();
     cout<<"ENGINEEER : ";
-    engineer.print();
+    engineer->print();
     cout<<"WEAPONSMITH : ";
-    weaponSmith.print();
+    weaponSmith->print();
     cout<<"MINER : ";
-    miner.print();
+    miner->print();
     cout<<endl;
 }
 
+void Crew::casualty(string killer,int turn) {
+    string s ="";
+    srand(time(0));
+    switch (rand()%6){
+        case 0:{
+            s +="Captain "+captain->getName();
+            captain->reroll(log.size());
+            break;
+        }
+        case 1:{
+            s +="Pilot "+pilot->getName();
+            pilot->reroll(log.size());
+            break;
+        }
+        case 2:{
+            s +="Engineer "+engineer->getName();
+            engineer->reroll(log.size());
+            break;
+        }
+        case 3:{
+            s +="Miner "+miner->getName();
+            miner->reroll(log.size());
+            break;
+        }
+        case 4:{
+            s +="Weapon Smith "+weaponSmith->getName();
+            weaponSmith->reroll(log.size());
+            break;
+        }
+        case 5:{
+            s +="A Crew Member";
+            break;
+        }
 
-string casualty(void (*functocall)(string)){
-    cout<< (*functocall)<<endl;
+    }
+    s += " died on turn "+turn;
+    s += " in a sector inhabited by "+killer;
+    log.push_back(s);
 }
 
-void generateOfficer(int lower,int upper, Officer* officer){
-    *officer = Officer("tony",32,SkillSet(lower,upper));
-}
+
+
+

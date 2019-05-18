@@ -7,7 +7,7 @@
 CombatManager::CombatManager(Ship *ship, Enemy *enemy) : ship(ship), enemy(enemy) {}
 
 
-void CombatManager::beginInstance() {
+bool CombatManager::beginInstance() {
     cout<<"YOU HAVE ENTERED COMBAT"<<endl;
     ship->printCombatStats();
     enemy->printStats();
@@ -40,7 +40,7 @@ void CombatManager::beginInstance() {
                 cout<<"THAT IS NOT A VALID TURN"<<endl;
         }
         if(enemy->getHp()<=0){
-            cout<<" YOU DEFEATED THE ENEMY"<<endl;
+            cout<<"YOU DEFEATED THE ENEMY"<<endl;
             getRewards();
 
             engaged = false;
@@ -52,11 +52,12 @@ void CombatManager::beginInstance() {
             cout<<"Enemy HP: "<<enemy->getHp()<<endl;
         }
 
+        if(ship->getHealth()<=0){
+            engaged= false;
+        }
+
     }
-
-    bool escapetry = false;
-
-
+    return casualty;
 }
 
 void CombatManager::attack() {
@@ -87,8 +88,8 @@ void CombatManager::attack() {
 
 void CombatManager::getRewards() {
     srand(time(0));
-    int reward = 50 * rand()%5;
-    cout<<"YOU EARNT $"<<reward<<endl;
+    int reward = 250;
+    cout<<"YOU EARNT $"<<reward<<endl<<endl;
     ship->addMoney(reward);
 }
 
@@ -124,7 +125,7 @@ void CombatManager::enemyAttack() {
 
     damage = damage * ship->getHull()->getResist();
 
-    if(rand()%101 > ship->getEngine()->getEvasion()) {
+    if(rand()%1001 > (ship->getEngine()->getEvasion()+ship->getCrew()->getPilot()->getSkillset().getPiloting())) {
         cout << "YOU AVOIDED THE ENEMY'S ATTACK" << endl<<endl;
     }else{
         if(crit){
@@ -133,6 +134,9 @@ void CombatManager::enemyAttack() {
             cout<< "THE ENEMY'S ATTACK HIT FOR "<<damage<<endl<<endl;
         }
         ship->minusHealth(damage);
+        if((rand()%101)<5){
+            casualty = true;
+        }
     }
 }
 

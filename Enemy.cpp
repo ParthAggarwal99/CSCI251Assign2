@@ -39,7 +39,7 @@ void Enemy::printStats() {
     cout<<"ENEMY STATS"<<endl;
     cout<<"hp: "<<hp<<endl;
     cout<<"damage: "<<damage<<endl;
-    cout<<"crit: "<<crit<<endl;
+    cout<<"crit: "<<crit<<endl<<endl;
 }
 
 void Enemy::enhance(int combat) {
