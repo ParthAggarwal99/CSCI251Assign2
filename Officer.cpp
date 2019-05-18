@@ -13,9 +13,11 @@ Officer::Officer(const string &name, int age, const SkillSet skillset) : name(na
 
 
 Officer::Officer() {
-    srand(time(0));
+
+    std::uniform_int_distribution<unsigned> nameDist(0,18);
+   //
     try {
-        name = names[rand() % 20];
+        name = names[nameDist(randEng)];
     }catch(std::out_of_range){
         cerr<<"OUT OF RANGE @ OFFICER CONSTRUCTOR"<<endl;
     }
@@ -77,6 +79,13 @@ int SkillSet::getWeapons() const {
 
 const SkillSet &Officer::getSkillset() const {
     return skillSet;
+}
+
+void Officer::print() {
+    cout<<"NAME: "<<name<<"  SKILLS: N"<<
+    skillSet.getNegotiation()<<" : P"<<skillSet.getPiloting()
+    <<" : M"<<skillSet.getMining()<<" : E"<<skillSet.getEngineering()
+    <<" : W"<<skillSet.getWeapons()<<endl;
 }
 
 //endregion

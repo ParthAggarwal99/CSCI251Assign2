@@ -23,6 +23,7 @@ public:
     const SkillSet &getSkillset() const;
     const string &getName() const;
     int getAge() const;
+    void print();
 private:
     string name;
     int age;

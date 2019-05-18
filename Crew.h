@@ -20,6 +20,7 @@ class Crew {
 public:
     Crew();
 
+    void printCrew();
     void setCrewSize(int crewSize);
 
     int getCrewSize() const;

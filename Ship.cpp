@@ -118,7 +118,8 @@ void Ship::printCombatStats() {
     cout<<"damage: "<<hardpoint->getDamage()<<endl;
     cout<<"crit: "<<hardpoint->getCritChance()<<endl;
     cout<<"accuracy: "<<hardpoint->getAccuracy()<<endl;
-    cout<<"armor: "<<hull->getArmor()<<endl<<endl;
+    cout<<"armor: "<<hull->getResist()*100<<"% @"<<hull->getArmor()<<endl<<endl;
+
 
 }
 
@@ -128,7 +129,8 @@ void Ship::printCoreStats() {
     cout<<"hp: "<<health<<endl;
     cout<<"food: "<<food<<endl;
     cout<<"fuel: "<<fuel<<endl;
-    cout<<"armor: "<<hull->getArmor()<<endl;
+    cout<<"dmg: "<<hardpoint->getDamage()<<endl;
+    cout<<"armor: "<<hull->getResist()*100<<"% @"<<hull->getArmor()<<endl<<endl;
 }
 
 int Ship::getOre() const {

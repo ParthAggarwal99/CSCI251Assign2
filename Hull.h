@@ -50,6 +50,9 @@ public:
         return armor;
     }
 
+    double getResist(){
+        return (100.00/(100.00+(armor*.4)));
+    }
     int getWeight() const {
         return weight;
     }

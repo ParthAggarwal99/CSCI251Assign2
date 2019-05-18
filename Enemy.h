@@ -33,7 +33,6 @@ private:
     int hp;
     int damage;
     int crit;
-    int armor;
     double scale;
 };
 

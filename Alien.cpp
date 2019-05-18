@@ -10,7 +10,8 @@ using namespace std;
 std::string alienNames [5] = {"Aurra","Azan","Bialar","Makkan","Zeno"};
 Alien::Alien() {
     srand(time(0));
-    switch (rand()%5){
+    int i =rand()%5;
+    switch (i){
         case 0:
             name = alienNames[0];
             hostile = false;
@@ -38,14 +39,18 @@ Alien::Alien() {
             trade = false;
             combatAbility = 20;
             desc ="The nomads\nThe Makkan often dont carry wares to trade and try to avoid combat";
+            break;
         case 4:
             name = alienNames[4];
             hostile= true;
             trade = true;
             combatAbility =15;
             desc = "A cautious group\nThe Zeno are hostile and will often attack others but can be negotiated with.";
+            break;
         default:
-            std::cerr<<"Something broken in Alien race constructor";
+            std::cerr<<"Something broken in Alien race constructor\n";
+            std::cerr<<"Alien switch defaulted from value  "<<i<<endl;
+            abort();
     }
 }
 

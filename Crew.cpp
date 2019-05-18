@@ -55,6 +55,22 @@ void Crew::setCrewSize(int crewSize) {
     Crew::crewSize = crewSize;
 }
 
+void Crew::printCrew() {
+    cout<<"CREWSIZE = "<<crewSize;
+    cout<<" ROLE  :  NAME  : NEGOTIATION:PILOTING:ENGINEERING:MINING:WEAPONS"<<endl;
+    cout<<"CAPTAIN : ";
+    captain.print();
+    cout<<"PILOT : ";
+    pilot.print();
+    cout<<"ENGINEEER : ";
+    engineer.print();
+    cout<<"WEAPONSMITH : ";
+    weaponSmith.print();
+    cout<<"MINER : ";
+    miner.print();
+    cout<<endl;
+}
+
 
 string casualty(void (*functocall)(string)){
     cout<< (*functocall)<<endl;

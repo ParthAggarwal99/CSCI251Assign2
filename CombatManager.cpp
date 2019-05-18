@@ -40,7 +40,9 @@ void CombatManager::beginInstance() {
                 cout<<"THAT IS NOT A VALID TURN"<<endl;
         }
         if(enemy->getHp()<=0){
+            cout<<" YOU DEFEATED THE ENEMY"<<endl;
             getRewards();
+
             engaged = false;
         }
 
@@ -84,7 +86,10 @@ void CombatManager::attack() {
 }
 
 void CombatManager::getRewards() {
-
+    srand(time(0));
+    int reward = 50 * rand()%5;
+    cout<<"YOU EARNT $"<<reward<<endl;
+    ship->addMoney(reward);
 }
 
 void CombatManager::emergencyRepair() {
@@ -117,6 +122,7 @@ void CombatManager::enemyAttack() {
         crit = true;
     }
 
+    damage = damage * ship->getHull()->getResist();
 
     if(rand()%101 > ship->getEngine()->getEvasion()) {
         cout << "YOU AVOIDED THE ENEMY'S ATTACK" << endl<<endl;

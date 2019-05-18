@@ -14,14 +14,12 @@ Enemy::Enemy() {
 }
 
 void Enemy::randomizeStats(int counter) {
-    std::cout<<"GENERATING NEW ENEMY"<<endl;
     scale =  pow(1.055,counter);
     srand(time(0));
 
-    hp = (rand()%201+200)*scale;
+    hp = (rand()%301+200)*scale;
     damage = (rand()%76+25)*scale;
     crit = (rand()%21);
-    armor = (rand()%91+10)*scale;
 }
 
 int Enemy::getHp() const {
@@ -36,16 +34,12 @@ int Enemy::getCrit() const {
     return crit;
 }
 
-int Enemy::getArmor() const {
-    return armor;
-}
 
 void Enemy::printStats() {
     cout<<"ENEMY STATS"<<endl;
     cout<<"hp: "<<hp<<endl;
     cout<<"damage: "<<damage<<endl;
     cout<<"crit: "<<crit<<endl;
-    cout<<"armor: "<<armor<<endl<<endl;
 }
 
 void Enemy::enhance(int combat) {

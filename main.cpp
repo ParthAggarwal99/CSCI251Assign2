@@ -9,6 +9,7 @@ using namespace std;
 #include "Ship.h"
 #include "Enemy.h"
 #include "CombatManager.h"
+#include "Sector.h"
 /**
  * TODO:
  *  find out how to do getters for inherited classes
@@ -24,52 +25,59 @@ using namespace std;
  *
  */
 void printOfficer(Officer * o);
+bool shipIsGood(Ship * ship);
 int main() {
-
+    int counter = 0;
     fillLists();
+    Ship ship;
+    Sector * sector;
 
-    Ship ship1;
-    Enemy enemy1;
-    bool active = true;
-
-    cout<<"WELCOME TO SPACE COMMANDER"<<endl;
+    ship.getCrew()->printCrew();
     system("pause");
+    do{
+        counter++;
 
+        srand(time(0));
+        int sectorRoll = rand()%101;
 
-    CombatManager cm = CombatManager(&ship1,&enemy1);
+        if(sectorRoll<=35){
+            sector = new ShipSector(&ship,counter);
+        }else if(sectorRoll<=60){
+            sector = new PlanetSector(&ship,counter);
+        }else if(sectorRoll<=75){
+            sector = new TradingSector(&ship,counter);
+        } else if(sectorRoll<=90){
+            sector = new EmptySector(&ship,counter);
+        }else{
+            sector = new AstroidSector(&ship,counter);
+        }
 
-    cm.beginInstance();
+        sector->arrive();
+        sector->options();
 
-    enemy1.randomizeStats(25);
-
-    cm=CombatManager(&ship1,&enemy1);
-
-    cm.beginInstance();
-
-
-
-//    Officer o;
-//    cout<<o.getName()<<" "<<o.getAge()<<endl;
-//    cout<<o.getSkillset().getEngineering()<<endl;
-//    cout<<o.getSkillset().getMining()<<endl;
-//    cout<<o.getSkillset().getNegotiation()<<endl;
-
-//    try{
-//        Ship ship1;
-//    }catch(std::bad_alloc){
-//        cout<<"bad alloc"<<endl;
-//    }
+        delete sector;
+    }while(shipIsGood(&ship));
 
     return 0;
 }
 
-void printOfficer(Officer * o){
-    cout<<o->getName()<<" "<<o->getAge()<<endl;
-    cout<<o->getSkillset().getEngineering()<<endl;
-    cout<<o->getSkillset().getMining()<<endl;
-    cout<<o->getSkillset().getNegotiation()<<endl<<endl;
-}
+bool shipIsGood(Ship * ship){
+    if(ship->getHealth()<=0){
+        cout<<"YOU HAVE NO MORE HEALTH"<<endl;
+        return false;
+    }
+    if(ship->getFood()<=0){
+        cout<<"YOU HAVE NO MORE FOOD"<<endl;
+        return false;
+    }
+    if(ship->getFuel()<=0){
+        cout<<"YOU HAVE NO MORE FUEL"<<endl;
+        return false;
+    }
+    if(ship->getCrew()->getCrewSize()<0){
+        cout<<"YOU HAVE NO MORE CREW"<<endl;
+        return false;
+    }
 
-void createAliens(){
-
+    return true;
 }
